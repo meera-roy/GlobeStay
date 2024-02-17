@@ -1,0 +1,44 @@
+{% extends 'Admin/header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <center><h1>RentType</h1></center>
+    <form action="" method="POST">
+        {%csrf_token %}
+        <table align="center" border="1" cellpadding="10">
+            <tr>
+                <td>RentType</td>
+                <td><input type="text" name="txt_renttype" id=""></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="submit" name="submit">
+                    <input type="submit" value="cancel"name="cancel" ></td>
+                
+            </tr>
+        </table>
+    </form>
+    <table align="center" border="1" cellpadding="10">
+        <tr>
+            <td>Sl.no</td>
+            <td>RentType</td>
+            <td>Action</td>
+        </tr>
+        <tr>
+            {% for i in renttype %}
+<td>{{forloop.counter}}</td>
+<td>{{i.renttype_name}}</td>
+<td><a href="{% url 'Admin:del_renttype' i.id %}">Delete</a>
+</td>
+        </tr>
+            {% endfor %}
+        </table>
+</body>
+</html>
+{% endblock content %}

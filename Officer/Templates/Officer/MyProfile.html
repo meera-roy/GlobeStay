@@ -1,0 +1,42 @@
+{% extends 'Officer/header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <center><h1>MyProfile</h1></center>
+    <form action="" method="post">
+        {% csrf_token %}
+        <table align="center" border="1" cellpadding="10">
+            <tr>
+                <td colspan="2"><img src="{{oregdata.photo.url}}" alt="{{oregdata.photo.url}}" width="150" height="150"></td>
+                
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>{{oregdata.name}}</td>
+            </tr>
+            <tr>
+                <td>Contact</td>
+                <td>{{oregdata.contact}}</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>{{oregdata.email}}</td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td>{{oregdata.address}}</td>
+            </tr>
+            
+
+        </table>
+    </form>
+</body>
+</html>
+{% endblock content %}

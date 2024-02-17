@@ -1,0 +1,75 @@
+{% extends 'Owner/header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <center><h1>Rent</h1></center>
+    <form action="" method="post" enctype="multipart/form-data" >
+        {% csrf_token %}
+        <table align="center" border="1" cellpadding="10">
+            <tr>
+                <td>Name</td>
+                <td><input type="text" name="txt_name" id=""></td>
+            </tr>
+            <tr>
+                <td>Image</td>
+                <td><input type="file" name="txt_img" id=""></td>
+            </tr>
+            <tr>
+                <td>Amount</td>
+                <td><input type="text" name="txt_amount" id=""></td>
+            </tr>
+            
+            <tr>
+                <td>Details</td>
+                <td><textarea name="txt_det" id="" cols="30" rows="10"></textarea></textarea></td>
+            </tr>
+            <tr>
+                <td>RentType</td>
+                <td><select name="select_ren" id="">
+                    <option>--select--</option>
+                    {% for i in rentid %}
+                    <option value="{{ i.id}}">{{ i.renttype_name }}</option> 
+                    {% endfor %}
+                </select></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="save" name="submit">
+                    <input type="submit" value="cancel"name="cancel" ></td>
+                
+            </tr>
+
+        </table>
+    </form>
+    <table align="center" border="1" cellpadding="10">
+        <tr>
+            <td>Sl.no</td>
+            <td>Name</td>
+            <td>Image</td>
+            <td>Amount</td>
+            <td>Action</td>
+        </tr>
+        <tr>
+            {% for i in rent %}
+<td>{{forloop.counter}}</td>
+<td>{{i.name}}</td>
+<td><img src="{{i.image.url}}" alt="" width="150" height="150"></td>
+<td>{{i.amount}}</td>
+
+
+<td><a href="{% url 'Owner:del_rent' i.id %}">Delete</a>|<a href="{% url 'Owner:Rentgallery' i.id %}">Add Gallery</a>
+</td>
+        </tr>
+            {% endfor %}
+    </table>
+</body>
+</html>
+{% endblock content %}
+
+            

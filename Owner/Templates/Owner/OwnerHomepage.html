@@ -1,0 +1,12 @@
+{% extends 'Owner/header.html' %}
+{% load static %}
+{% block content %}
+Welcome {{oregdata.name}}
+<br><a href="{% url 'Owner:MyProfile' %}">my profile</a><br>
+<a href="{% url 'Owner:EditProfile' %}">edit profile</a><br>
+<a href="{% url 'Owner:ChangePassword' %}">change password</a><br>
+<a href="{% url 'Owner:UserBooking' %}">New</a><br>
+<a href="{% url 'Owner:accepteduserbooking' %}">Accpted Booking</a><br>
+<a href="{% url 'Owner:rejecteduserbooking' %}">Rejected</a><br>
+<a href="{% url 'Owner:Rent' %}">rent</a>
+{% endblock content %}

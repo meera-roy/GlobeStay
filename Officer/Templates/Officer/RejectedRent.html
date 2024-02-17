@@ -1,0 +1,41 @@
+{% extends 'Officer/header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <center><h1>RejectedRent</h1></center>
+    <form action="" method="post" id="" enctype="multipart/form-data">
+        {%csrf_token %}
+            <table align="center" border="1" cellpadding="10">
+                <tr>
+                    <td>Sl.no</td>
+                    <td>Name</td>
+                    <td>Amount</td>
+                    <td>Details</td>
+                    <td>Action</td>
+                </tr>
+                {% for i in rdata %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.name}}</td>
+                    <td>{{i.amount}}</td>
+                    <td>{{i.details}}</td>
+                    
+                    <td>
+                        <a href="{% url 'Officer:acceptrent' i.id %}">Accept</a>
+                        
+                    </td>
+                    
+                </tr>
+                {% endfor %}
+            </table>
+    </form>
+</body>
+</html>
+{% endblock content %}

@@ -1,0 +1,55 @@
+{% extends 'Admin/header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <center><h1>State</h1></center>
+    <form action="" method="post">
+        {%csrf_token %}
+        <table align="center" border="1" cellpadding="10">
+            <tr>
+                <td>Country</td>
+                <td><select name="select_cou" id="">
+                    <option>--select--</option>
+                    {% for i in coudata %}
+                    <option value="{{ i.id}}">{{ i.country_name }}</option> 
+                    {% endfor %}
+                </select></td>
+            </tr>
+            <tr>
+                <td>State</td>
+                <td><input type="text" name="txt_state" id=""></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="submit" name="submit">
+                    <input type="submit" value="cancel"name="cancel" ></td>
+                
+            </tr>
+        </table>
+    </form>
+    <table align="center" border="1" cellpadding="10">
+        <tr>
+            <td>Sl.no</td>
+            <td>Country</td>
+            <td>State</td>
+            <td>Action</td>
+        </tr>
+        <tr>
+            {% for i in state %}
+<td>{{forloop.counter}}</td>
+<td>{{i.country.country_name}}</td>
+<td>{{i.state_name}}</td>
+<td><a href="{% url 'Admin:del_state' i.id %}">Delete</a>
+</td>
+        </tr>
+            {% endfor %}
+    </table>
+</body>
+</html>
+{% endblock content %}

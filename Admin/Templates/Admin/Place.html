@@ -1,0 +1,104 @@
+{% extends 'Admin/header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <center><h1>Place</h1></center>
+    <form action="" method="post" id="plaform" data-district-url="{% url 'Admin:ajaxdistrict' %}" data-state-url="{% url 'Admin:ajaxstate' %}">
+        {%csrf_token %}
+        <table align="center" border="1" cellpadding="10">
+            <tr>
+                <td>Country</td>
+                <td><select name="select_cou" id="select_cou">
+                    <option>--select--</option>
+                    {% for i in coudata %}
+                    <option value="{{ i.id}}">{{ i.country_name }}</option>
+                    {% endfor %}
+                </select></td>
+            </tr>
+            <tr>
+                <td>State</td>
+                <td><select name="select_sta" id="select_sta">
+                    <option value="">--select--</option>
+
+
+                </select></td>
+            </tr>
+            <tr>
+                <td>District</td>
+                <td><select name="select_dis" id="select_dis">
+                    <option value="">--select--</option>
+
+
+                </select></td>
+            </tr>
+            <tr>
+                <td>Place</td>
+                <td><input type="text" name="txt_place" id=""></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="submit" name="submit">
+                    <input type="submit" value="cancel" name="cancel">
+                 </td>
+                
+            </tr>
+        </table>
+    </form>
+    <table align="center" border="1" cellpadding="10">
+        <tr>
+            <td>Sl.no</td>
+            <td>Country</td>
+            <td>State</td>
+            <td>District</td>
+            <td>Place</td>
+            <td>Action</td>
+        </tr>
+        {% for i in pladata %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.country.country_name}}</td>
+            <td>{{i.state.state_name}}</td>
+            <td>{{i.district.district_name}}</td>
+            <td>{{i.place_name}}</td>
+            <td><a href="{% url 'Admin:del_place' i.id %}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+</body>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $("#select_cou").change(function () {
+        var did = $(this).val();
+        var ur = $("#plaform").attr("data-state-url");
+        $.ajax({
+            url: ur,
+            data: { country: did, },
+            success: function (data) {
+                $("#select_sta").html(data);
+            },
+        });
+    });
+</script>
+<script>
+    $("#select_sta").change(function () {
+        var did = $(this).val();
+        var ur = $("#plaform").attr("data-district-url");
+        $.ajax({
+            url: ur,
+            data: { state: did, },
+            success: function (data) {
+                $("#select_dis").html(data);
+            },
+        });
+    });
+</script>
+{% endblock content %}
