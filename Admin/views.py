@@ -7,8 +7,13 @@ from Guest.models import *
 def cou(request):
     coudata=tbl_country.objects.all()
     if request.method=="POST":
-        tbl_country.objects.create(country_name=request.POST.get("txt_country"))
-        return render(request,"Admin/Country.html",{'country':coudata})
+        datacount=tbl_country.objects.filter(country_name=request.POST.get("txt_country")).count()
+        if datacount>0:
+            return render(request,"Admin/Country.html",{'country':coudata})
+            tbl_country.objects.create(country_name=request.POST.get("txt_country"))
+        else:
+            tbl_country.objects.create(country_name=request.POST.get("txt_country"))        
+            return render(request,"Admin/Country.html",{'country':coudata})
     else:
         return render(request,"Admin/Country.html",{'country':coudata})
 
@@ -33,8 +38,12 @@ def EditCountry(request,eid):
 def ren(request):
     rendata=tbl_renttype.objects.all()
     if request.method=="POST":
-        tbl_renttype.objects.create(renttype_name=request.POST.get("txt_renttype"))
-        return render(request,"Admin/RentType.html",{'renttype':rendata})
+        datacount=tbl_renttype.objects.filter(renttype_name=request.POST.grt("txt_renttype")).count()
+        if datacount>0:
+            return render(request,"Admin/RentType.html",{'renttype':rendata})
+        else:    
+            tbl_renttype.objects.create(renttype_name=request.POST.get("txt_renttype"))
+            return render(request,"Admin/RentType.html",{'renttype':rendata})
     else:
         return render(request,"Admin/RentType.html",{'renttype':rendata})
 
@@ -48,11 +57,17 @@ def sta(request):
     stadata=tbl_state.objects.all()
     if request.method=="POST":
         cou = tbl_country.objects.get(id=request.POST.get("select_cou"))
-        tbl_state.objects.create(
+        datacount=tbl_state.objects.filter( state_name=request.POST.get("txt_state"),
+            country=cou).count()
+
+        if datacount>0:
+            return render(request,"Admin/State.html",{'state':stadata,'coudata':coudata})
+        else:
+            tbl_state.objects.create(
             state_name=request.POST.get("txt_state"),
             country=cou
-        )
-        return render(request,"Admin/State.html",{'state':stadata,'coudata':coudata})
+            )
+            return render(request,"Admin/State.html",{'state':stadata,'coudata':coudata})
     else:
         return render(request,"Admin/State.html",{'state':stadata,'coudata':coudata})   
 
@@ -68,12 +83,18 @@ def dis(request):
     if request.method=="POST":
         cou = tbl_country.objects.get(id=request.POST.get("select_cou"))
         sta = tbl_state.objects.get(id=request.POST.get("select_sta"))
-        tbl_district.objects.create(
+        datacount=tbl_district.objects.filter(district_name=request.POST.get("txt_district"),
+            country=cou,state=sta).count()
+        if datacount>0:
+            return render(request,"Admin/district.html",{'coudata':coudata,'disdata':disdata})
+        else:    
+
+            tbl_district.objects.create(
             district_name=request.POST.get("txt_district"),
             country=cou,
             state=sta
-        )
-        return render(request,"Admin/district.html",{'coudata':coudata,'disdata':disdata})
+            )
+            return render(request,"Admin/district.html",{'coudata':coudata,'disdata':disdata})
     else:
         return render(request,"Admin/district.html",{'coudata':coudata,'disdata':disdata})          
 
@@ -96,13 +117,18 @@ def pla(request):
         cou = tbl_country.objects.get(id=request.POST.get("select_cou"))
         sta = tbl_state.objects.get(id=request.POST.get("select_sta"))
         dis = tbl_district.objects.get(id=request.POST.get("select_dis"))
-        tbl_place.objects.create(
+        datacount=tbl_place.objects.filter(place_name=request.POST.get("txt_place"),
+            country=cou,state=sta,district=dis).count()
+        if datacount>0:
+            return render(request,"Admin/place.html",{'coudata':coudata,'pladata':pladata})    
+
+            tbl_place.objects.create( 
             place_name=request.POST.get("txt_place"),
             country=cou,
             state=sta,
             district=dis
-        )
-        return render(request,"Admin/place.html",{'coudata':coudata,'pladata':pladata})
+            )
+            return render(request,"Admin/place.html",{'coudata':coudata,'pladata':pladata})
     else:
         return render(request,"Admin/place.html",{'coudata':coudata,'pladata':pladata})       
 

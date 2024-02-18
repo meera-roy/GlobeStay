@@ -118,15 +118,20 @@ def userrequest(request,rid):
     uregdata=tbl_userregistration.objects.get(id=request.session['uid'])
     rentdata=tbl_rent.objects.get(id=rid)
     if request.method=="POST":
-
-        tbl_userrequest.objects.create(
+        datacount=tbl_userrequest.objects.filter(fromdate = request.POST.get("txt_fromdate"),
+            todate = request.POST.get("txt_todate"),rent=rentdata).count()
+        if datacount>0:
+            return render(request,"User/UserRequest.html",{'uregdata':uregdata,'rentdata':rentdata})    
+        else:
+            tbl_userrequest.objects.create(
             file = request.FILES.get("txt_file"),
             content = request.POST.get("txt_content"),
+            fromdate = request.POST.get("txt_fromdate"),
+            todate = request.POST.get("txt_todate"),
             user=uregdata,
             rent=rentdata,
-
-        )  
-        return render(request,"User/UserRequest.html",{'uregdata':uregdata,'rentdata':rentdata})    
+            )  
+            return render(request,"User/UserRequest.html",{'uregdata':uregdata,'rentdata':rentdata})    
     else:
         return render(request,"User/UserRequest.html",{'uregdata':uregdata,'rentdata':rentdata})              
 
