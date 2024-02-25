@@ -7,69 +7,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
     <center><h1>Rent</h1></center>
-    <form action="" method="post" enctype="multipart/form-data" >
-        {% csrf_token %}
-        <table align="center" border="1" cellpadding="10">
-            <tr>
-                <td>Name</td>
-                <td><input type="text" name="txt_name" id=""></td>
-            </tr>
-            <tr>
-                <td>Image</td>
-                <td><input type="file" name="txt_img" id=""></td>
-            </tr>
-            <tr>
-                <td>Amount</td>
-                <td><input type="text" name="txt_amount" id=""></td>
-            </tr>
-            
-            <tr>
-                <td>Details</td>
-                <td><textarea name="txt_det" id="" cols="30" rows="10"></textarea></textarea></td>
-            </tr>
-            <tr>
-                <td>RentType</td>
-                <td><select name="select_ren" id="">
-                    <option>--select--</option>
-                    {% for i in rentid %}
-                    <option value="{{ i.id}}">{{ i.renttype_name }}</option> 
-                    {% endfor %}
-                </select></td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center"><input type="submit" value="save" name="submit">
-                    <input type="submit" value="cancel"name="cancel" ></td>
+    <div class="container mt-5">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table class="table table-bordered" align="center">
+                <tr>
+                    <td>Name</td>
+                    <td><input type="text" name="txt_name" id="" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td>Image</td>
+                    <td><input type="file" name="txt_img" id="" class="form-control-file"></td>
+                </tr>
+                <tr>
+                    <td>Amount</td>
+                    <td><input type="text" name="txt_amount" id="" class="form-control"></td>
+                </tr>
                 
+                <tr>
+                    <td>Details</td>
+                    <td><textarea name="txt_det" id="" cols="30" rows="10" class="form-control"></textarea></td>
+                </tr>
+                <tr>
+                    <td>RentType</td>
+                    <td>
+                        <select name="select_ren" id="" class="form-control">
+                            <option>--select--</option>
+                            {% for i in rentid %}
+                            <option value="{{ i.id }}">{{ i.renttype_name }}</option> 
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" value="Save" name="submit" class="btn btn-primary">
+                        <input type="submit" value="Cancel" name="cancel" class="btn btn-secondary">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    
+        <table class="table table-bordered" align="center">
+            <tr>
+                <td>Sl.no</td>
+                <td>Name</td>
+                <td>Image</td>
+                <td>Amount</td>
+                <td>Action</td>
             </tr>
-
-        </table>
-    </form>
-    <table align="center" border="1" cellpadding="10">
-        <tr>
-            <td>Sl.no</td>
-            <td>Name</td>
-            <td>Image</td>
-            <td>Amount</td>
-            <td>Action</td>
-        </tr>
-        <tr>
             {% for i in rent %}
-<td>{{forloop.counter}}</td>
-<td>{{i.name}}</td>
-<td><img src="{{i.image.url}}" alt="" width="150" height="150"></td>
-<td>{{i.amount}}</td>
-
-
-<td><a href="{% url 'Owner:del_rent' i.id %}">Delete</a>|<a href="{% url 'Owner:Rentgallery' i.id %}">Add Gallery</a>
-</td>
-        </tr>
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.name}}</td>
+                <td><img src="{{i.image.url}}" alt="" width="150" height="150"></td>
+                <td>{{i.amount}}</td>
+                <td>
+                    <a href="{% url 'Owner:del_rent' i.id %}" class="btn btn-danger">Delete</a>
+                    | 
+                    <a href="{% url 'Owner:Rentgallery' i.id %}" class="btn btn-success">Add Gallery</a>
+                </td>
+            </tr>
             {% endfor %}
-    </table>
+        </table>
+    </div>
 </body>
 </html>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
 {% endblock content %}
 
             

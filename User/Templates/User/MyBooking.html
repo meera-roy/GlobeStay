@@ -11,48 +11,53 @@
 <body>
     <center><h1>My Booking</h1></center>
     <form action="" method="post" id="" enctype="multipart/form-data">
-        {%csrf_token %}
-            <table align="center" border="1" cellpadding="10">
-                <tr>
-                    <td>Sl.no</td>
-                    <td>Date</td>
-                    <td>Name</td>
-                    <td>Contact</td>
-                    <td>Email</td>
-                    <td>RentType</td>
-                    <td>RentName</td>
-                    <td>Image</td>
-                    <td>Amount</td>
-                    <td>From Date</td>
-                    <td>To Date</td>
-                    <td>Status</td>
-                </tr>
-                {% for i in udata %}
-                <tr>
-                    <td>{{forloop.counter}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.rent.owner.name}}</td>
-                    <td>{{i.rent.owner.contact}}</td>
-                    <td>{{i.rent.owner.email}}</td>
-                    <td>{{i.rent.renttype.renttype_name}}</td>
-                    <td>{{i.rent.name}}</td>
-                    <td>{{i.rent.image}}</td>
-                    <td>{{i.rent.amount}}</td>
-                    <td>{{i.fromdate}}</td>
-                    <td>{{i.todate}}</td>
-                    <td>
-                       {% if i.status == "1" %}
-                       <p>Accepted | <a href="{% url 'User:AdvancePayment' i.rent.id %}">Advance Payment</a></p>
-                       {% elif i.status == "2" %}
-                       <p>Rejected</p>
-                       {% else %}
-                       <p>Pending</p> 
-                       {% endif %}
-                    </td>
-                    
-                </tr>
-                {% endfor %}
+        {% csrf_token %}
+        <div class="container mt-4">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Sl.no</th>
+                        <th>Date</th>
+                        <th>Name</th>
+                        <th>Contact</th>
+                        <th>Email</th>
+                        <th>RentType</th>
+                        <th>RentName</th>
+                        <th>Image</th>
+                        <th>Amount</th>
+                        <th>From Date</th>
+                        <th>To Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in udata %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ i.date }}</td>
+                            <td>{{ i.rent.owner.name }}</td>
+                            <td>{{ i.rent.owner.contact }}</td>
+                            <td>{{ i.rent.owner.email }}</td>
+                            <td>{{ i.rent.renttype.renttype_name }}</td>
+                            <td>{{ i.rent.name }}</td>
+                            <td>{{ i.rent.image }}</td>
+                            <td>{{ i.rent.amount }}</td>
+                            <td>{{ i.fromdate }}</td>
+                            <td>{{ i.todate }}</td>
+                            <td>
+                                {% if i.status == "1" %}
+                                    <p>Accepted | <a href="{% url 'User:AdvancePayment' i.rent.id %}">Advance Payment</a></p>
+                                {% elif i.status == "2" %}
+                                    <p>Rejected</p>
+                                {% else %}
+                                    <p>Pending</p> 
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
             </table>
+        </div>
     </form>
 </body>
 </html>

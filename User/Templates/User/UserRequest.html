@@ -11,32 +11,34 @@
 <body>
     <center><h1>User Request</h1></center>
     <form action="" method="POST" enctype="multipart/form-data">
-    {%csrf_token %}
-    <table align="center" border="1" cellpadding="10">
-        
-        <tr>
-            <td>File</td>
-            <td><input type="file" name="txt_file" id=""></td>
-        </tr>
-        <tr>
-            <td>Content</td>
-            <td><input type="text" name="txt_content" id=""></td>
-        </tr>
-        <tr>
-            <td>From Date</td>
-            <td><input type="date" name="txt_fromdate" id=""></td>
-        </tr>
-        <tr>
-            <td>To date</td>
-            <td><input type="date" name="txt_todate" id=""></td>
-        </tr>
-
-        <tr>
-            <td colspan="2" align="center"><input type="submit" name="btn_save" value="save" id="">
-                <input type="submit" name="btn_reset" value="cancel" id=""></td>
-        </tr>
-    </table>
-</form>
+        {% csrf_token %}
+        <div class="container mt-4">
+            <table class="table table-bordered">
+                <tr>
+                    <td>File</td>
+                    <td><input type="file" class="form-control-file" name="txt_file" id=""></td>
+                </tr>
+                <tr>
+                    <td>Content</td>
+                    <td><input type="text" class="form-control" name="txt_content" id=""></td>
+                </tr>
+                <tr>
+                    <td>From Date</td>
+                    <td><input type="date" class="form-control" name="txt_fromdate" id=""></td>
+                </tr>
+                <tr>
+                    <td>To Date</td>
+                    <td><input type="date" class="form-control" name="txt_todate" id=""></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="text-center">
+                        <button type="submit" class="btn btn-primary" name="btn_save">Save</button>
+                        <button type="submit" class="btn btn-secondary" name="btn_reset">Cancel</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
 </body>
 </html>
 {% endblock content %}

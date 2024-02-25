@@ -7,36 +7,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
 </head>
 <body>
     <center><h1>acceptedOwnerList</h1></center>
-    <form action="" method="post" id="" enctype="multipart/form-data">
-        {%csrf_token %}
-            <table align="center" border="1" cellpadding="10">
-                <tr>
-                    <td>Sl.no</td>
-                    <td>Name</td>
-                    <td>Contact</td>
-                    <td>Email</td>
-                    <td>Address</td>
-                    <td>Action</td>
-                </tr>
-                {% for i in owndata %}
-                <tr>
-                    <td>{{forloop.counter}}</td>
-                    <td>{{i.name}}</td>
-                    <td>{{i.contact}}</td>
-                    <td>{{i.email}}</td>
-                    <td>{{i.address}}</td>
-                    <td>
-                        
-                        <a href="{% url 'Officer:rejectowner' i.id %}">Reject</a>
-                    </td>
-                    
-                </tr>
-                {% endfor %}
+    <div class="container mt-5">
+        <form action="" method="post" id="" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table class="table table-bordered table-hover" align="center">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Sl.no</th>
+                        <th>Name</th>
+                        <th>Contact</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in owndata %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{i.name}}</td>
+                            <td>{{i.contact}}</td>
+                            <td>{{i.email}}</td>
+                            <td>{{i.address}}</td>
+                            <td>
+                                <a href="{% url 'Officer:rejectowner' i.id %}" class="btn btn-danger">Reject</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
             </table>
-    </form>
+        </form>
+    </div>
+    
 </body>
 </html>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
 {% endblock content %}

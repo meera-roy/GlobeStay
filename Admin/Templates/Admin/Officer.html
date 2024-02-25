@@ -1,57 +1,70 @@
+{% extends 'Admin/header.html' %}
+{% load static %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <form action="" method="post" enctype="multipart/form-data">
-        {%csrf_token %}
-        <table align="center" border="1" cellpadding="10">
-            <tr>
-                <td>Name</td>
-                <td><input type="text" name="txt_name" id=""></td>
-            </tr>
-            <tr>
-                <td>Contact</td>
-                <td><input type="text" name="txt_contact" id=""></td>
-            </tr>
-            <tr>
-                <td>Email</td>
-                <td><input type="text" name="txt_email" id=""></td>
-            </tr>
-            <tr>
-                <td>Address</td>
-                <td><textarea name="txt_add" id="" cols="30" rows="10"></textarea></td>
-            </tr>
-            <tr>
-                <td>Country</td>
-                <td><select name="select_cou" id="">
-                    <option>--select--</option>
-                    {% for i in coudata %}
-                    <option value="{{ i.id}}">{{ i.country_name }}</option> 
-                    {% endfor %}
-                </select></td>
-            </tr>
-            <tr>
-                <td>Photo</td>
-                <td><input type="file" name="txt_photo" id=""></td>
-            </tr>
-            <tr>
-                <td>Password</td>
-                <td><input type="password" name="txt_pass" id=""></td>
-            </tr>
-            <tr>
-                <td>Conformpassword</td>
-                <td><input type="password" name="txt_conform" id=""></td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center"><input type="submit" name="btn_save" value="Register" id="">
-                    <input type="submit" name="btn_reset" value="cancel" id=""></td>
-                
-            </tr>
-        </table>
-    </form>
+    <br><br><br><br>
+    <div class="container mt-5">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="txt_name">Name</label>
+                        <input type="text" class="form-control" name="txt_name" id="txt_name">
+                    </div>
+                    <div class="form-group">
+                        <label for="txt_contact">Contact</label>
+                        <input type="text" class="form-control" name="txt_contact" id="txt_contact">
+                    </div>
+                    <div class="form-group">
+                        <label for="txt_email">Email</label>
+                        <input type="text" class="form-control" name="txt_email" id="txt_email">
+                    </div>
+                    <div class="form-group">
+                        <label for="txt_add">Address</label>
+                        <textarea class="form-control" name="txt_add" id="txt_add" cols="30" rows="5"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="select_cou">Country</label>
+                        <select class="form-control" name="select_cou" id="select_cou">
+                            <option>--select--</option>
+                            {% for i in coudata %}
+                            <option value="{{ i.id }}">{{ i.country_name }}</option> 
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="txt_photo">Photo</label>
+                        <input type="file" class="form-control-file" name="txt_photo" id="txt_photo">
+                    </div>
+                    <div class="form-group">
+                        <label for="txt_pass">Password</label>
+                        <input type="password" class="form-control" name="txt_pass" id="txt_pass">
+                    </div>
+                    <div class="form-group">
+                        <label for="txt_conform">Confirm Password</label>
+                        <input type="password" class="form-control" name="txt_conform" id="txt_conform">
+                    </div>
+                    <div class="form-group text-center">
+                        <input type="submit" class="btn btn-primary" name="btn_save" value="Register">
+                        <input type="submit" class="btn btn-secondary" name="btn_reset" value="Cancel">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+{% endblock content %}

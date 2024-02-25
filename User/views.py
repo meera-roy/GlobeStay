@@ -102,7 +102,20 @@ def ajaxrent(request):
 
 def complaint(request):
     uregdata=tbl_userregistration.objects.get(id=request.session['uid'])
-    return render(request,"User/Complaint.html",{'uregdata':uregdata}) 
+    comdata=tbl_complainttype.objects.all()
+    compdata=tbl_usercomplaint.objects.all()
+    if request.method=="POST":
+        com=tbl_complainttype.objects.get(id=request.POST.get("select_com"))
+        tbl_usercomplaint.objects.create(
+            
+            complaintTitle = request.POST.get("txt_name"),
+            content = request.POST.get("txt_content"),
+            Complainttype=com
+
+        )
+        return render(request,"User/UserComplaint.html",{'uregdata':uregdata,'comdata':comdata,'compdata':compdata}) 
+    else:
+        return render(request,"User/UserComplaint.html",{'uregdata':uregdata,'comdata':comdata,'compdata':compdata})     
 
 def feedback(request):
     uregdata=tbl_userregistration.objects.get(id=request.session['uid'])

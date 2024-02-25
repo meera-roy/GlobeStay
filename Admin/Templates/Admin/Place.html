@@ -7,73 +7,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <center><h1>Place</h1></center>
-    <form action="" method="post" id="plaform" data-district-url="{% url 'Admin:ajaxdistrict' %}" data-state-url="{% url 'Admin:ajaxstate' %}">
-        {%csrf_token %}
-        <table align="center" border="1" cellpadding="10">
-            <tr>
-                <td>Country</td>
-                <td><select name="select_cou" id="select_cou">
-                    <option>--select--</option>
-                    {% for i in coudata %}
-                    <option value="{{ i.id}}">{{ i.country_name }}</option>
-                    {% endfor %}
-                </select></td>
-            </tr>
-            <tr>
-                <td>State</td>
-                <td><select name="select_sta" id="select_sta">
-                    <option value="">--select--</option>
-
-
-                </select></td>
-            </tr>
-            <tr>
-                <td>District</td>
-                <td><select name="select_dis" id="select_dis">
-                    <option value="">--select--</option>
-
-
-                </select></td>
-            </tr>
-            <tr>
-                <td>Place</td>
-                <td><input type="text" name="txt_place" id=""></td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center"><input type="submit" value="submit" name="submit">
-                    <input type="submit" value="cancel" name="cancel">
-                 </td>
-                
-            </tr>
+    <div class="container mt-5">
+        <form action="" method="post" id="plaform" data-district-url="{% url 'Admin:ajaxdistrict' %}" data-state-url="{% url 'Admin:ajaxstate' %}">
+            {% csrf_token %}
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="select_cou">Country</label>
+                        <select class="form-control" name="select_cou" id="select_cou">
+                            <option>--select--</option>
+                            {% for i in coudata %}
+                            <option value="{{ i.id }}">{{ i.country_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="select_sta">State</label>
+                        <select class="form-control" name="select_sta" id="select_sta">
+                            <option value="">--select--</option>
+                            <!-- Add options dynamically using JavaScript or server-side code -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="select_dis">District</label>
+                        <select class="form-control" name="select_dis" id="select_dis">
+                            <option value="">--select--</option>
+                            <!-- Add options dynamically using JavaScript or server-side code -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="txt_place">Place</label>
+                        <input type="text" class="form-control" name="txt_place" id="txt_place">
+                    </div>
+                    <div class="form-group text-center">
+                        <input type="submit" class="btn btn-primary" value="Submit" name="submit">
+                        <input type="submit" class="btn btn-secondary" value="Cancel" name="cancel">
+                    </div>
+                </div>
+            </div>
+        </form>
+    
+        <table class="table mt-5">
+            <thead>
+                <tr>
+                    <th>Sl.no</th>
+                    <th>Country</th>
+                    <th>State</th>
+                    <th>District</th>
+                    <th>Place</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in pladata %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ i.country.country_name }}</td>
+                    <td>{{ i.state.state_name }}</td>
+                    <td>{{ i.district.district_name }}</td>
+                    <td>{{ i.place_name }}</td>
+                    <td><a href="{% url 'Admin:del_place' i.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
-    </form>
-    <table align="center" border="1" cellpadding="10">
-        <tr>
-            <td>Sl.no</td>
-            <td>Country</td>
-            <td>State</td>
-            <td>District</td>
-            <td>Place</td>
-            <td>Action</td>
-        </tr>
-        {% for i in pladata %}
-        <tr>
-            <td>{{forloop.counter}}</td>
-            <td>{{i.country.country_name}}</td>
-            <td>{{i.state.state_name}}</td>
-            <td>{{i.district.district_name}}</td>
-            <td>{{i.place_name}}</td>
-            <td><a href="{% url 'Admin:del_place' i.id %}">Delete</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
+    </div>
+    
     
 </body>
 </html>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
     $("#select_cou").change(function () {

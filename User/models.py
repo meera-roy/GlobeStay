@@ -1,6 +1,7 @@
 from django.db import models
 from Guest.models import *
 from Owner.models import *
+from .models import *
 # Create your models here.
 
 class tbl_userrequest(models.Model):   
@@ -17,3 +18,10 @@ class tbl_userrequest(models.Model):
 class tbl_book(models.Model):   
     file=models.FileField(upload_to="MemberDocs/")   
     content=models.CharField(max_length=50)   
+
+class tbl_usercomplaint(models.Model):  
+    complaint=models.CharField(max_length=50)
+    complaintdate=models.DateField(auto_now_add=True) 
+    user=models.ForeignKey(tbl_userregistration,on_delete=models.SET_NULL,null=True)  
+
+    

@@ -7,38 +7,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <center><h1>RentType</h1></center>
+    <div class="container mt-5">
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        @media (max-width: 767px) {
+            /* Adjust styles for smaller screens here */
+            .table {
+                font-size: 14px; /* Adjust font size for smaller screens */
+            }
+
+            .form-control {
+                width: 100%; /* Make the input fields full width on smaller screens */
+            }
+        }
+    </style>
+    <title>Your Form Title</title>
+</head>
+<body>
+
+<div class="container mt-5">
     <form action="" method="POST">
-        {%csrf_token %}
-        <table align="center" border="1" cellpadding="10">
+        {% csrf_token %}
+        <table class="table table-bordered table-hover" align="center">
             <tr>
-                <td>RentType</td>
-                <td><input type="text" name="txt_renttype" id=""></td>
+                <td>Rent Type</td>
+                <td><input type="text" class="form-control" name="txt_renttype" id="txt_renttype"></td>
             </tr>
             <tr>
-                <td colspan="2" align="center"><input type="submit" value="submit" name="submit">
-                    <input type="submit" value="cancel"name="cancel" ></td>
-                
+                <td colspan="2" align="center">
+                    <input type="submit" class="btn btn-primary" value="Submit" name="submit">
+                    <input type="submit" class="btn btn-secondary" value="Cancel" name="cancel">
+                </td>
             </tr>
         </table>
     </form>
-    <table align="center" border="1" cellpadding="10">
-        <tr>
-            <td>Sl.no</td>
-            <td>RentType</td>
-            <td>Action</td>
-        </tr>
-        <tr>
+
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Sl.no</th>
+                <th>Rent Type</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
             {% for i in renttype %}
-<td>{{forloop.counter}}</td>
-<td>{{i.renttype_name}}</td>
-<td><a href="{% url 'Admin:del_renttype' i.id %}">Delete</a>
-</td>
-        </tr>
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ i.renttype_name }}</td>
+                    <td>
+                        <a href="{% url 'Admin:del_renttype' i.id %}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
             {% endfor %}
-        </table>
+        </tbody>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>
+
+</body>
+</html>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 {% endblock content %}

@@ -9,24 +9,33 @@
     <title>Document</title>
 </head>
 <body>
-    <center><h1>Book</h1></center>
+    <center><h1>Book</h1>
     <form action="" method="POST">
-    {%csrf_token %}
-    <table align="center" border="1" cellpadding="10">
-        <tr>
-            <td>File document</td>
-            <td><input type="file" name="txt_file" id=""></td>
-        </tr>
-        <tr>
-            <td>Content</td>
-            <td><input type="text" name="txt_content" id=""></td>
-        </tr>
-        <tr>
-            <td colspan="2" align="center"><input type="submit" name="btn_save" value="save" id="">
-                <input type="submit" name="btn_reset" value="cancel" id=""></td>
-        </tr>
-    </table>
-</form>
+        {% csrf_token %}
+        <div class="container mt-4">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>File document</td>
+                            <td><input type="file" class="form-control" name="txt_file" id=""></td>
+                        </tr>
+                        <tr>
+                            <td>Content</td>
+                            <td><input type="text" class="form-control" name="txt_content" id=""></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="text-center">
+                                <input type="submit" class="btn btn-primary" name="btn_save" value="Save" id="">
+                                <input type="submit" class="btn btn-secondary" name="btn_reset" value="Cancel" id="">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </form>
 </body>
+</center>
 </html>
 {% endblock content %}
