@@ -40,3 +40,4 @@ class tbl_userrating(models.Model):
 class tbl_userfeedback(models.Model):  
     feedback=models.CharField(max_length=50)
     feedbackdate=models.DateField(auto_now_add=True) 
+    user=models.ForeignKey(tbl_userregistration,on_delete=models.SET_NULL,null=True) 

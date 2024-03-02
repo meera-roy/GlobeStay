@@ -125,10 +125,11 @@ def DeleteComplaint(request,did):
 
 def feedback(request):
     feeddata=tbl_userfeedback.objects.all()
+    userdata=tbl_userregistration.objects.get(id=request.session["uid"])
     if request.method=="POST":
         tbl_userfeedback.objects.create(    
             feedback = request.POST.get("txt_feedback"),
-
+            user=userdata
         )
         return render(request,"User/UserFeedback.html",{'feeddata':feeddata}) 
     else:
