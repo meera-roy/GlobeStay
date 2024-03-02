@@ -108,3 +108,26 @@ def rejectbook(request,rid):
     data.status=2
     data.save()
     return redirect("Owner:UserBooking")
+
+
+def complaint(request):
+    oregdata=tbl_ownerregistration.objects.get(id=request.session['oid'])
+    comdata=tbl_complainttype.objects.all()
+    compdata=tbl_ownercomplaint.objects.all()
+    if request.method=="POST":
+        com=tbl_complainttype.objects.get(id=request.POST.get("select_com"))
+        tbl_ownercomplaint.objects.create(
+            
+            complainttitle = request.POST.get("txt_name"),
+            content = request.POST.get("txt_content"),
+            complainttype=com,
+            owner=oregdata,
+
+        )
+        return render(request,"Owner/OwnerComplaint.html",{'oregdata':oregdata,'comdata':comdata,'compdata':compdata}) 
+    else:
+        return render(request,"Owner/OwnerComplaint.html",{'oregdata':oregdata,'comdata':comdata,'compdata':compdata})     
+
+def DeleteComplaint(request,did):
+    tbl_ownercomplaint.objects.get(id=did).delete()
+    return redirect("Owner:OwnerComplaint")    

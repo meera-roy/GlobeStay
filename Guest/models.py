@@ -28,3 +28,10 @@ class tbl_userregistration(models.Model):
     photo=models.FileField(upload_to="MemberDocs/")  
     proof=models.FileField(upload_to="MemberDocs/") 
     password=models.CharField(max_length=50) 
+
+
+
+class tbl_adminlogin(models.Model): 
+    name=models.CharField(max_length=50) 
+    email=models.EmailField(max_length=50)
+    password=models.CharField(max_length=50) 

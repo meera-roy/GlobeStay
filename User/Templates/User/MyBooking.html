@@ -46,7 +46,7 @@
                             <td>{{ i.todate }}</td>
                             <td>
                                 {% if i.status == "1" %}
-                                    <p>Accepted | <a href="{% url 'User:AdvancePayment' i.rent.id %}">Advance Payment</a></p>
+                                    <p>Accepted | <a href="{% url 'User:AdvancePayment' i.rent.id %}">Advance Payment</a> | <a href="{% url 'User:shoprating' i.rent.id %}">Rate Now</a></p>
                                 {% elif i.status == "2" %}
                                     <p>Rejected</p>
                                 {% else %}

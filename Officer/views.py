@@ -3,6 +3,7 @@ from Admin.models import *
 from Officer.models import *
 from Guest.models import *
 from Owner.models import *
+from User.models import *
 
 # Create your views here.
 
@@ -77,16 +78,19 @@ def rejectowner(request,rid):
 
 
 def viewrent(request):
-    rdata=tbl_rent.objects.filter(status=0)
+    countrydata=tbl_country.objects.get(id=request.session["codata"])
+    rdata=tbl_rent.objects.filter(status=0,owner__place__district__state__country=countrydata)
     return render(request,"Officer/ViewRent.html",{'rdata':rdata})       
         
 
 def rejectedrent(request):
-    rdata=tbl_rent.objects.filter(status=1)
+    countrydata=tbl_country.objects.get(id=request.session["codata"])
+    rdata=tbl_rent.objects.filter(status=2,owner__place__district__state__country=countrydata)
     return render(request,"Officer/RejectedRent.html",{'rdata':rdata})  
 
 def acceptedrent(request):
-    rdata=tbl_rent.objects.filter(status=1)
+    countrydata=tbl_country.objects.get(id=request.session["codata"])
+    rdata=tbl_rent.objects.filter(status=1,owner__place__district__state__country=countrydata)
     return render(request,"Officer/AcceptedRent.html",{'rdata':rdata})  
          
 def rejectrent(request,rid):
@@ -100,3 +104,15 @@ def acceptrent(request,aid):
     data.status=1
     data.save()
     return redirect("Officer:ViewRent")
+
+
+def viewcomplaint(request):
+    countrydata=tbl_country.objects.get(id=request.session["codata"])
+    owndata=tbl_ownercomplaint.objects.filter(owner__place__district__state__country=countrydata)
+    return render(request,"Officer/ViewComplaint.html",{'owndata':owndata}) 
+
+
+def viewfeedback(request):
+    countrydata=tbl_country.objects.get(id=request.session["codata"])
+    udata=tbl_userfeedback.objects.filter(user__place__district__state__country=countrydata)
+    return render(request,"Officer/ViewFeedback.html",{'udata':udata}) 

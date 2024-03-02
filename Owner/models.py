@@ -13,7 +13,21 @@ class tbl_rent(models.Model):
     owner=models.ForeignKey(tbl_ownerregistration,on_delete=models.CASCADE)  
     status=models.IntegerField(default=0)
 
+
 class tbl_rentgallery(models.Model):  
     galleryimage=models.FileField(upload_to="MemberDocs/")  
     rent=models.ForeignKey(tbl_rent,on_delete=models.CASCADE) 
+
+
+class tbl_ownercomplaint(models.Model):  
+    complainttitle=models.CharField(max_length=50)
+    complainttype=models.ForeignKey(tbl_complainttype,on_delete=models.CASCADE) 
+    content=models.CharField(max_length=50)
+    complaintdate=models.DateField(auto_now_add=True) 
+    owner=models.ForeignKey(tbl_ownerregistration,on_delete=models.SET_NULL,null=True)  
+
+    
+
+
+
      

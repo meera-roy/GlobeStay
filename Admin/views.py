@@ -206,5 +206,3 @@ def com(request):
 def DeleteComplaint(request,did):
     tbl_complainttype.objects.get(id=did).delete()
     return redirect("Admin:ComplaintType")
-
-

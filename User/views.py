@@ -108,19 +108,68 @@ def complaint(request):
         com=tbl_complainttype.objects.get(id=request.POST.get("select_com"))
         tbl_usercomplaint.objects.create(
             
-            complaintTitle = request.POST.get("txt_name"),
+            complainttitle = request.POST.get("txt_name"),
             content = request.POST.get("txt_content"),
-            Complainttype=com
+            complainttype=com,
+            user=uregdata,
 
         )
         return render(request,"User/UserComplaint.html",{'uregdata':uregdata,'comdata':comdata,'compdata':compdata}) 
     else:
         return render(request,"User/UserComplaint.html",{'uregdata':uregdata,'comdata':comdata,'compdata':compdata})     
 
-def feedback(request):
-    uregdata=tbl_userregistration.objects.get(id=request.session['uid'])
-    return render(request,"User/Feedback.html",{'uregdata':uregdata})    
+def DeleteComplaint(request,did):
+    tbl_usercomplaint.objects.get(id=did).delete()
+    return redirect("User:UserComplaint")
 
+
+def feedback(request):
+    feeddata=tbl_userfeedback.objects.all()
+    if request.method=="POST":
+        tbl_userfeedback.objects.create(    
+            feedback = request.POST.get("txt_feedback"),
+
+        )
+        return render(request,"User/UserFeedback.html",{'feeddata':feeddata}) 
+    else:
+        return render(request,"User/UserFeedback.html",{'feeddata':feeddata})
+
+
+
+
+
+def starrating(request,mid):
+    parray=[1,2,3,4,5]
+    wdata=tbl_rent.objects.get(id=mid)
+    counts=0
+    counts=stardata=tbl_userrating.objects.filter(rent=wdata).count()
+    if counts>0:
+        res=0
+        stardata=tbl_userrating.objects.filter(rent=wdata).order_by('-datetime')
+        for i in stardata:
+            res=res+i.rating_data
+        avg=res//counts
+        return render(request,"User/ShopRating.html",{'mid':mid,'data':stardata,'ar':parray,'avg':avg,'count':counts})
+    else:
+         return render(request,"User/ShopRating.html",{'mid':mid})
+
+def ajaxstar(request):
+    parray=[1,2,3,4,5]
+    rating_data=request.GET.get('rating_data')
+    user_name=request.GET.get('user_name')
+    user_review=request.GET.get('user_review')
+    workid=request.GET.get('workid')
+    
+    wdata=tbl_rent.objects.get(id=workid)
+    tbl_userrating.objects.create(user_name=user_name,user_review=user_review,rating_data=rating_data,rent=wdata)
+    stardata=tbl_userrating.objects.filter(rent=wdata).order_by('-datetime')
+    return render(request,"User/AjaxRating.html",{'data':stardata,'ar':parray})
+
+
+
+def DeleteFeedback(request,did):
+    tbl_userfeedback.objects.get(id=did).delete()
+    return redirect("User:UserFeedback")
 
 def book(request):
     uregdata=tbl_userregistration.objects.get(id=request.session['uid'])
@@ -178,3 +227,5 @@ def loader(request):
 
 def success(request):
     return render(request,"User/Success.html")
+
+

@@ -50,7 +50,8 @@ def login(request):
 
         ucount=tbl_userregistration.objects.filter(email=Email,password=Password).count()
         ocount=tbl_ownerregistration.objects.filter(email=Email,password=Password,status=3).count()
-        
+        acount=tbl_adminlogin.objects.filter(email=Email,password=Password).count()
+        ofcount=tbl_officer.objects.filter(email=Email,password=Password).count()
         if ucount > 0:
             uregdata=tbl_userregistration.objects.get(email=Email,password=Password)
             request.session['uid']=uregdata.id
@@ -59,6 +60,15 @@ def login(request):
             oregdata=tbl_ownerregistration.objects.get(email=Email,password=Password)
             request.session['oid']=oregdata.id
             return redirect('Owner:OwnerHome')
+        elif acount > 0:
+            adata=tbl_adminlogin.objects.get(email=Email,password=Password)
+            request.session['aid']=adata.id
+            return redirect('Admin:homepage')    
+        elif ofcount > 0:
+            regdata=tbl_officer.objects.get(email=Email,password=Password)
+            request.session['oid']=regdata.id
+            request.session["codata"]=regdata.country.id
+            return redirect('Officer:OfficerHome')     
         
         else:
             msg = "Invalid Credentials!!"

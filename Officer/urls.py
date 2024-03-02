@@ -16,10 +16,10 @@ urlpatterns = [
      path('viewrent/',views.viewrent,name="ViewRent"),
      path('rejectedrent/',views.rejectedrent,name="rejectedrent"), 
      path('accptedrent/',views.acceptedrent,name="acceptedrent"), 
-
      path('rejectrent/<int:rid>',views.rejectrent,name="rejectrent"), 
      path('acceptrent/<int:aid>',views.acceptrent,name="acceptrent"), 
-
+     path('viewcomplaint/',views.viewcomplaint,name="ViewComplaint"),     
+     path('viewfeedback/',views.viewfeedback,name="ViewFeedback"),     
 
 
 ]

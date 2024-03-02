@@ -15,6 +15,8 @@ urlpatterns = [
     path('rejecteduserbooking/',views.rejecteduserbooking,name="rejecteduserbooking"),
     path('acceptbook/<int:aid>',views.acceptbook,name="acceptbook"),
     path('rejectbook/<int:rid>',views.rejectbook,name="rejectbook"),
+    path('ownercomplaint/',views.complaint,name="OwnerComplaint"), 
+    path('del_complaint/<int:did>',views.DeleteComplaint,name="del_complaint"),
 
 
 ]    
