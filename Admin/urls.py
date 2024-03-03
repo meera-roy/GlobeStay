@@ -25,6 +25,7 @@ urlpatterns = [
      path('rejectowner/<int:rid>',views.rejectowner,name="rejectowner"),
      path('Complaint/',views.com,name="ComplaintType"),
      path('del_complaint/<int:did>',views.DeleteComplaint,name="del_complaint"),
+     path('logout/',views.logout,name="logout"),
 
 
 ]

@@ -34,7 +34,7 @@ class tbl_userrating(models.Model):
     user_name=models.CharField(max_length=50)
     user_review=models.CharField(max_length=50)
     datetime=models.DateField(auto_now_add=True) 
-    reant=models.ForeignKey(tbl_rent,on_delete=models.CASCADE)
+    rent=models.ForeignKey(tbl_rent,on_delete=models.CASCADE)
 
 
 class tbl_userfeedback(models.Model):  

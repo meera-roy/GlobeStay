@@ -18,9 +18,9 @@
                 <div class="col-md-6">
                     <table class="table table-bordered">
                         <tr>
-                            <td>Country</td>
+                            <td>Country <span style="color: red;">*</span></td>
                             <td>
-                                <select class="form-control" name="select_cou" id="">
+                                <select class="form-control" name="select_cou" id="" required>
                                     <option>--select--</option>
                                     {% for i in coudata %}
                                         <option value="{{ i.id }}">{{ i.country_name }}</option>
@@ -29,8 +29,8 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>State</td>
-                            <td><input type="text" class="form-control" name="txt_state" id=""></td>
+                            <td>State <span style="color: red;">*</span></td>
+                            <td><input type="text" class="form-control" name="txt_state" id="" required></td>
                         </tr>
                         <tr>
                             <td colspan="2" align="center">

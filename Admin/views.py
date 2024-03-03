@@ -38,7 +38,7 @@ def EditCountry(request,eid):
 def ren(request):
     rendata=tbl_renttype.objects.all()
     if request.method=="POST":
-        datacount=tbl_renttype.objects.filter(renttype_name=request.POST.grt("txt_renttype")).count()
+        datacount=tbl_renttype.objects.filter(renttype_name=request.POST.get("txt_renttype")).count()
         if datacount>0:
             return render(request,"Admin/RentType.html",{'renttype':rendata})
         else:    
@@ -121,7 +121,7 @@ def pla(request):
             country=cou,state=sta,district=dis).count()
         if datacount>0:
             return render(request,"Admin/place.html",{'coudata':coudata,'pladata':pladata})    
-
+        else:
             tbl_place.objects.create( 
             place_name=request.POST.get("txt_place"),
             country=cou,
@@ -165,7 +165,7 @@ def reg(request):
         return render(request,"Admin/Officer.html",{'officer':regdata,'coudata':coudata})       
 
 def ownerlist(request):
-    owndata=tbl_ownerregistration.objects.filter(status=2)
+    owndata=tbl_ownerregistration.objects.filter(status=1)
     return render(request,"Admin/ViewOwnerList.html",{'owndata':owndata})       
         
 def acceptedownerlist(request):
@@ -206,3 +206,9 @@ def com(request):
 def DeleteComplaint(request,did):
     tbl_complainttype.objects.get(id=did).delete()
     return redirect("Admin:ComplaintType")
+
+
+    
+def logout(request):
+    del request.session["aid"]
+    return redirect("Guest:Login")

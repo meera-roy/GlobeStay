@@ -131,3 +131,9 @@ def complaint(request):
 def DeleteComplaint(request,did):
     tbl_ownercomplaint.objects.get(id=did).delete()
     return redirect("Owner:OwnerComplaint")    
+
+
+
+def logout(request):
+    del request.session["aid"]
+    return redirect("Guest:Login")    

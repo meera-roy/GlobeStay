@@ -19,8 +19,8 @@
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="select_cou">Country</label>
-                        <select class="form-control" name="select_cou" id="select_cou">
+                        <label for="select_cou">Country <span style="color: red;">*</span></label>
+                        <select class="form-control" name="select_cou" id="select_cou" required>
                             <option value="">--select--</option>
                             {% for i in coudata %}
                                 <option value="{{ i.id }}">{{ i.country_name }}</option>
@@ -32,8 +32,8 @@
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="select_sta">State</label>
-                        <select class="form-control" name="select_sta" id="select_sta">
+                        <label for="select_sta">State<span style="color: red;">*</span></label>
+                        <select class="form-control" name="select_sta" id="select_sta" required>
                             <option value="">--select--</option>
                             <!-- Options will be dynamically added using JavaScript -->
                         </select>
@@ -43,8 +43,8 @@
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="txt_district">District</label>
-                        <input type="text" class="form-control" name="txt_district" id="txt_district">
+                        <label for="txt_district">District<span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" name="txt_district" id="txt_district" required>
                     </div>
                 </div>
             </div>

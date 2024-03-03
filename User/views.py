@@ -52,52 +52,200 @@ def viewrents(request):
     stdata=tbl_state.objects.all()
     disdata=tbl_district.objects.all()
     pladata=tbl_place.objects.all()
-    rent=tbl_rent.objects.all()
+    rentdata=tbl_rent.objects.all()
+    parray=[]
+    for i in rentdata:
+        rdata=tbl_rent.objects.get(id=i.id)
+        sumdata=0
+        totaldatacount=tbl_userrating.objects.filter(rent=rdata).count()
+        totaldata=tbl_userrating.objects.filter(rent=rdata)
+        for j in totaldata:
+            sumdata=sumdata+int(j.rating_data)
+        if totaldatacount>0:
+            avg=sumdata//totaldatacount
+        else:
+            avg=0
+        parray.append(avg)    
     renttype=tbl_renttype.objects.all()
-    if request.method=="POST":
-        return render(request,"User/ViewRents.html",{'rent':rent,'coudata':coudata,'stdata':stdata,'disdata':disdata,'pladata':pladata,'renttype':renttype})
-    else:
-        return render(request,"User/ViewRents.html",{'rent':rent,'coudata':coudata,'stdata':stdata,'disdata':disdata,'pladata':pladata,'renttype':renttype})
+    datas=zip(rentdata,parray)
+    ar=[1,2,3,4,5]
+    return render(request,"User/ViewRents.html",{'ar':ar,'rent':datas,'coudata':coudata,'stdata':stdata,'disdata':disdata,'pladata':pladata,'renttype':renttype})
 
 def ajaxrent(request):
+    ar=[1,2,3,4,5]
     if request.GET.get('rid')!="":
         renttypedata=tbl_renttype.objects.get(id=request.GET.get('rid'))
         if request.GET.get('pid')!="":
             placedata=tbl_place.objects.get(id=request.GET.get('pid'))
             rentdata=tbl_rent.objects.filter(owner__place=placedata,renttype=renttypedata)
-            return render(request,"User/ajaxrent.html",{'data':rentdata})
+            parray=[]
+            for i in rentdata:
+                rdata=tbl_rent.objects.get(id=i.id)
+                sumdata=0
+                totaldatacount=tbl_userrating.objects.filter(rent=rdata).count()
+                totaldata=tbl_userrating.objects.filter(rent=rdata)
+                for j in totaldata:
+                    sumdata=sumdata+int(j.rating_data)
+                if totaldatacount>0:
+                    avg=sumdata//totaldatacount
+                else:
+                    avg=0
+                parray.append(avg)    
+            renttype=tbl_renttype.objects.all()
+            datas=zip(rentdata,parray)
+            return render(request,"User/ajaxrent.html",{'rent':datas,'ar':ar})
         elif request.GET.get('did')!="":
             districtdata=tbl_district.objects.get(id=request.GET.get('did'))
             rentdata=tbl_rent.objects.filter(owner__place__district=districtdata,renttype=renttypedata)
-            return render(request,"User/ajaxrent.html",{'data':rentdata})
+            parray=[]
+            for i in rentdata:
+                rdata=tbl_rent.objects.get(id=i.id)
+                sumdata=0
+                totaldatacount=tbl_userrating.objects.filter(rent=rdata).count()
+                totaldata=tbl_userrating.objects.filter(rent=rdata)
+                for j in totaldata:
+                    sumdata=sumdata+int(j.rating_data)
+                if totaldatacount>0:
+                    avg=sumdata//totaldatacount
+                else:
+                    avg=0
+                parray.append(avg)    
+            renttype=tbl_renttype.objects.all()
+            datas=zip(rentdata,parray)
+            return render(request,"User/ajaxrent.html",{'rent':datas,'ar':ar})
         elif request.GET.get('sid')!="":
             statedata=tbl_state.objects.get(id=request.GET.get('sid'))
             rentdata=tbl_rent.objects.filter(owner__place__district__state=statedata,renttype=renttypedata)
-            return render(request,"User/ajaxrent.html",{'data':rentdata})    
+            parray=[]
+            for i in rentdata:
+                rdata=tbl_rent.objects.get(id=i.id)
+                sumdata=0
+                totaldatacount=tbl_userrating.objects.filter(rent=rdata).count()
+                totaldata=tbl_userrating.objects.filter(rent=rdata)
+                for j in totaldata:
+                    sumdata=sumdata+int(j.rating_data)
+                if totaldatacount>0:
+                    avg=sumdata//totaldatacount
+                else:
+                    avg=0
+                parray.append(avg)    
+            renttype=tbl_renttype.objects.all()
+            datas=zip(rentdata,parray)
+            return render(request,"User/ajaxrent.html",{'rent':datas,'ar':ar})    
         elif request.GET.get('cid')!="":
             countrydata=tbl_country.objects.get(id=request.GET.get('cid'))
             rentdata=tbl_rent.objects.filter(owner__place__district__state__country=countrydata,renttype=renttypedata)
-            return render(request,"User/ajaxrent.html",{'data':rentdata})
+            parray=[]
+            for i in rentdata:
+                rdata=tbl_rent.objects.get(id=i.id)
+                sumdata=0
+                totaldatacount=tbl_userrating.objects.filter(rent=rdata).count()
+                totaldata=tbl_userrating.objects.filter(rent=rdata)
+                for j in totaldata:
+                    sumdata=sumdata+int(j.rating_data)
+                if totaldatacount>0:
+                    avg=sumdata//totaldatacount
+                else:
+                    avg=0
+                parray.append(avg)    
+            renttype=tbl_renttype.objects.all()
+            datas=zip(rentdata,parray)
+            return render(request,"User/ajaxrent.html",{'rent':datas,'ar':ar})
         else:
             rentdata=tbl_rent.objects.filter(renttype=renttypedata)
-            return render(request,"User/ajaxrent.html",{'data':rentdata})
+            parray=[]
+            for i in rentdata:
+                rdata=tbl_rent.objects.get(id=i.id)
+                sumdata=0
+                totaldatacount=tbl_userrating.objects.filter(rent=rdata).count()
+                totaldata=tbl_userrating.objects.filter(rent=rdata)
+                for j in totaldata:
+                    sumdata=sumdata+int(j.rating_data)
+                if totaldatacount>0:
+                    avg=sumdata//totaldatacount
+                else:
+                    avg=0
+                parray.append(avg)    
+            renttype=tbl_renttype.objects.all()
+            datas=zip(rentdata,parray)
+            return render(request,"User/ajaxrent.html",{'rent':datas,'ar':ar})
     else:
         if request.GET.get('pid')!="":
             placedata=tbl_place.objects.get(id=request.GET.get('pid'))
             rentdata=tbl_rent.objects.filter(owner__place=placedata)
-            return render(request,"User/ajaxrent.html",{'data':rentdata})
+            parray=[]
+            for i in rentdata:
+                rdata=tbl_rent.objects.get(id=i.id)
+                sumdata=0
+                totaldatacount=tbl_userrating.objects.filter(rent=rdata).count()
+                totaldata=tbl_userrating.objects.filter(rent=rdata)
+                for j in totaldata:
+                    sumdata=sumdata+int(j.rating_data)
+                if totaldatacount>0:
+                    avg=sumdata//totaldatacount
+                else:
+                    avg=0
+                parray.append(avg)    
+            renttype=tbl_renttype.objects.all()
+            datas=zip(rentdata,parray)
+            return render(request,"User/ajaxrent.html",{'rent':datas,'ar':ar})
         elif request.GET.get('did')!="":
             districtdata=tbl_district.objects.get(id=request.GET.get('did'))
             rentdata=tbl_rent.objects.filter(owner__place__district=districtdata)
-            return render(request,"User/ajaxrent.html",{'data':rentdata})
+            parray=[]
+            for i in rentdata:
+                rdata=tbl_rent.objects.get(id=i.id)
+                sumdata=0
+                totaldatacount=tbl_userrating.objects.filter(rent=rdata).count()
+                totaldata=tbl_userrating.objects.filter(rent=rdata)
+                for j in totaldata:
+                    sumdata=sumdata+int(j.rating_data)
+                if totaldatacount>0:
+                    avg=sumdata//totaldatacount
+                else:
+                    avg=0
+                parray.append(avg)    
+            renttype=tbl_renttype.objects.all()
+            datas=zip(rentdata,parray)
+            return render(request,"User/ajaxrent.html",{'rent':datas,'ar':ar})
         elif request.GET.get('sid')!="":
             statedata=tbl_state.objects.get(id=request.GET.get('sid'))
             rentdata=tbl_rent.objects.filter(owner__place__district__state=statedata)
-            return render(request,"User/ajaxrent.html",{'data':rentdata})    
+            parray=[]
+            for i in rentdata:
+                rdata=tbl_rent.objects.get(id=i.id)
+                sumdata=0
+                totaldatacount=tbl_userrating.objects.filter(rent=rdata).count()
+                totaldata=tbl_userrating.objects.filter(rent=rdata)
+                for j in totaldata:
+                    sumdata=sumdata+int(j.rating_data)
+                if totaldatacount>0:
+                    avg=sumdata//totaldatacount
+                else:
+                    avg=0
+                parray.append(avg)    
+            renttype=tbl_renttype.objects.all()
+            datas=zip(rentdata,parray)
+            return render(request,"User/ajaxrent.html",{'rent':datas,'ar':ar})    
         else:
             countrydata=tbl_country.objects.get(id=request.GET.get('cid'))
             rentdata=tbl_rent.objects.filter(owner__place__district__state__country=countrydata)
-            return render(request,"User/ajaxrent.html",{'data':rentdata})
+            parray=[]
+            for i in rentdata:
+                rdata=tbl_rent.objects.get(id=i.id)
+                sumdata=0
+                totaldatacount=tbl_userrating.objects.filter(rent=rdata).count()
+                totaldata=tbl_userrating.objects.filter(rent=rdata)
+                for j in totaldata:
+                    sumdata=sumdata+int(j.rating_data)
+                if totaldatacount>0:
+                    avg=sumdata//totaldatacount
+                else:
+                    avg=0
+                parray.append(avg)    
+            renttype=tbl_renttype.objects.all()
+            datas=zip(rentdata,parray)
+            return render(request,"User/ajaxrent.html",{'rent':datas,'ar':ar})
 
 
 def complaint(request):
@@ -168,6 +316,7 @@ def ajaxstar(request):
 
 
 
+
 def DeleteFeedback(request,did):
     tbl_userfeedback.objects.get(id=did).delete()
     return redirect("User:UserFeedback")
@@ -179,7 +328,7 @@ def book(request):
 
 def userrequest(request,rid):
     uregdata=tbl_userregistration.objects.get(id=request.session['uid'])
-    rentdata=tbl_rent.objects.get(id=rid)
+    rentdata=tbl_rent.objects.get(id=rid) 
     if request.method=="POST":
         datacount=tbl_userrequest.objects.filter(fromdate = request.POST.get("txt_fromdate"),
             todate = request.POST.get("txt_todate"),rent=rentdata).count()
@@ -228,5 +377,11 @@ def loader(request):
 
 def success(request):
     return render(request,"User/Success.html")
+
+
+
+def logout(request):
+    del request.session["aid"]
+    return redirect("Guest:Login")      
 
 

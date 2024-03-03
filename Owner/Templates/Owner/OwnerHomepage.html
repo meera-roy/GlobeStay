@@ -1,12 +1,17 @@
 {% extends 'Owner/header.html' %}
 {% load static %}
 {% block content %}
-Welcome {{oregdata.name}}
-<br><a href="{% url 'Owner:MyProfile' %}">my profile</a><br>
-<a href="{% url 'Owner:EditProfile' %}">edit profile</a><br>
-<a href="{% url 'Owner:ChangePassword' %}">change password</a><br>
-<a href="{% url 'Owner:UserBooking' %}">New</a><br>
-<a href="{% url 'Owner:accepteduserbooking' %}">Accpted Booking</a><br>
-<a href="{% url 'Owner:rejecteduserbooking' %}">Rejected</a><br>
-<a href="{% url 'Owner:Rent' %}">rent</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body  style="background-image: url();">
+    <marquee behavior="scroll" direction="left"><h1>Welcome {{oregdata.name}}
+        </h1></marquee>
+</body>
+</html>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 {% endblock content %}

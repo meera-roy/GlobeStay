@@ -83,14 +83,17 @@ License URI: http://www.themevault.net/license/-->
                                             <li><a data-hover="Change Password"  href="{% url 'Owner:ChangePassword' %}"><span>Change Password</span></a></li>
                                             <li><a data-hover="Rent" href="{% url 'Owner:Rent' %}"><span>Rent</span></a></li>
                                             
-                                            <li><a data-hover="Contact Us" href="contact.html"><span>contact Us</span></a></li>
+                                            <li><a data-hover="User Booking" href="{% url 'Owner:UserBooking' %}"><span>User Booking</span></a></li>
+                                            <li><a data-hover="Accepted User Booking" href="{% url 'Owner:accepteduserbooking' %}"><span>Accepted User Booking</span></a></li>
+                                            <li><a data-hover="Rejected User Booking" href="{% url 'Owner:rejecteduserbooking' %}"><span>Rejected User Booking</span></a></li>
+                                            
                                         </ul>
 
                                     </div>
                                 </nav>
                             </div>
                             <div class="col-md-2  col-sm-4 col-xs-12 hidden-sm">
-                                <div class="text-right"><button type="button" class="book-now-btn">Book Now</button></div>
+                                <div class="text-right"><a data-hover="Logout" href="{% url 'Admin:logout' %}" class="btn btn-danger"><span>Logout</span></a></div>
                             </div>
                         </div>
                     </div>

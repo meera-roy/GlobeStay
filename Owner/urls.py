@@ -17,6 +17,6 @@ urlpatterns = [
     path('rejectbook/<int:rid>',views.rejectbook,name="rejectbook"),
     path('ownercomplaint/',views.complaint,name="OwnerComplaint"), 
     path('del_complaint/<int:did>',views.DeleteComplaint,name="del_complaint"),
-
+    path('logout/',views.logout,name="logout"),
 
 ]    

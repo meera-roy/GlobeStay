@@ -279,7 +279,7 @@
             else {
                 //alert(rating_data);
                 $.ajax({
-                    url: "../../User/ajaxstar/",
+                    url: "../../user/ajaxstar/",
                     data: { rating_data: rating_data, user_name: user_name, user_review: user_review, workid: labour_id },
                     success: function (data) {
                         $('#review_modal').modal('hide');

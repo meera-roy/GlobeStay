@@ -39,8 +39,8 @@
         {% csrf_token %}
         <table class="table table-bordered table-hover" align="center">
             <tr>
-                <td>Rent Type</td>
-                <td><input type="text" class="form-control" name="txt_renttype" id="txt_renttype"></td>
+                <td>Rent Type<span style="color: red;">*</span></td>
+                <td><input type="text" class="form-control" name="txt_renttype" id="txt_renttype" required></td>
             </tr>
             <tr>
                 <td colspan="2" align="center">
