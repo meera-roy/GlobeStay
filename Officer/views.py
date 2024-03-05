@@ -116,3 +116,7 @@ def viewfeedback(request):
     countrydata=tbl_country.objects.get(id=request.session["codata"])
     udata=tbl_userfeedback.objects.filter(user__place__district__state__country=countrydata)
     return render(request,"Officer/ViewFeedback.html",{'udata':udata}) 
+
+def logout(request):
+    del request.session["uid"]
+    return redirect("Guest:login")

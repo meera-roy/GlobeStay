@@ -19,7 +19,9 @@ urlpatterns = [
      path('rejectrent/<int:rid>',views.rejectrent,name="rejectrent"), 
      path('acceptrent/<int:aid>',views.acceptrent,name="acceptrent"), 
      path('viewcomplaint/',views.viewcomplaint,name="ViewComplaint"),     
-     path('viewfeedback/',views.viewfeedback,name="ViewFeedback"),     
+     path('viewfeedback/',views.viewfeedback,name="ViewFeedback"),
+     path('logout/',views.logout,name="logout"),   
+
 
 
 ]
