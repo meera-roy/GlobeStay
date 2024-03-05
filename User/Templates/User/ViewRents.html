@@ -94,6 +94,7 @@
                             {% else %}
                             <i class="fas fa-star star-light"></i>
                             {% endif %} {% endfor %}</p>
+                            <p><a href="{% url 'User:Viewmore' i.id  %}">View More</a></p>
                         <p><a href="{% url 'User:UserRequest' i.id %}" class="btn btn-primary">Book</a></p>
                     </div>  
                 </td>

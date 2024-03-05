@@ -1,0 +1,57 @@
+{% extends 'User/header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="container mt-4">
+            <table class="table table-bordered">
+                <tr>
+                    <td colspan="2" class="text-center">
+                        <img src="{{i.image.url}}" alt="{{i.image.url}}" width="150" height="150">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td>{{i.name}}</td>
+                </tr>
+                <tr>
+                    <td>Rate</td>
+                    <td>{{i.amount}}</td>
+                </tr>
+                <tr>
+                    <td>Details</td>
+                    <td>{{i.details}}</td>
+                </tr>
+                <tr>
+                    <td>Owner Name</td>
+                    <td>{{ data.owner.name }}</td>
+                </tr>
+                <tr>
+                    <td>Owner Contact</td>
+                    <td>{{ data.owner.contact }}</td>
+                </tr>
+                <tr>
+                    <td>Owner EMail</td>
+                    <td>{{ data.owner.email }}</td>
+                </tr>
+                
+                <tr>
+                    <td colspan="2" class="text-center">
+                        <a href="{% url 'User:ViewRents' %}" class="btn btn-primary">Back To Book</a>
+                       
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</body>
+</html>
+{% endblock content %}
