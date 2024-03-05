@@ -24,5 +24,7 @@ urlpatterns = [
     path('ajaxstar/',views.ajaxstar,name="ajaxstar"),
     path('logout/',views.logout,name="logout"),
 
+    path('Viewmore/<int:rid>',views.Viewmore,name="Viewmore"),
+
 
 ]    

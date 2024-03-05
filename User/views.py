@@ -333,7 +333,7 @@ def userrequest(request,rid):
         datacount=tbl_userrequest.objects.filter(fromdate = request.POST.get("txt_fromdate"),
             todate = request.POST.get("txt_todate"),rent=rentdata).count()
         if datacount>0:
-            return render(request,"User/UserRequest.html",{'uregdata':uregdata,'rentdata':rentdata})    
+            return render(request,"User/UserRequest.html",{'uregdata':uregdata,'rentdata':rentdata,'msg':1})    
         else:
             tbl_userrequest.objects.create(
             file = request.FILES.get("txt_file"),
@@ -385,3 +385,6 @@ def logout(request):
     return redirect("Guest:Login")      
 
 
+def Viewmore(request,rid):
+    rentdata=tbl_rent.objects.get(id=rid)
+    return render(request,"User/ViewMore.html",{'data':rentdata})
