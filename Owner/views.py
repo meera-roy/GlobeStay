@@ -137,3 +137,32 @@ def DeleteComplaint(request,did):
 def logout(request):
     del request.session["aid"]
     return redirect("Guest:Login")    
+
+
+def bookreport(request):
+    if 'sid' in request.session:
+        total=0
+        slr=tbl_ownerregistration.objects.get(id=request.session["oid"])
+    # mdata=tbl_wcart.objects.filter(rent__Owner=slr)
+        if request.method == "POST":
+            if request.POST.get('fdate')!="" and request.POST.get('edate')!="":
+                data1=tbl_userrequest.objects.filter(fromdate__gt=request.POST.get('fdate'),fromdate_lt=request.POST.get('edate'),rent__owner=slr)
+                for i in data1:
+                    total=total+(int(i.qty)*int(i.rent.amount))
+                return render(request,"Owner/BookingReport.html",{'data1':data1,'total':total})
+            elif request.POST.get('fdate')!="" and request.POST.get('edate') =="":
+                data2=tbl_userrequest.objects.filter(fromdate__gt=request.POST.get('fdate'),rent__owner=slr)
+                for i in data2:
+                    total=total+(int(i.qty)*int(i.rent.amount))
+                return render(request,"Owner/BookingReport.html",{'data1':data2,'total':total})
+            elif request.POST.get('fdate') =="" and request.POST.get('edate')!="":
+                data3=tbl_userrequest.objects.filter(fromdate_lt=request.POST.get('edate'),rent__owner=slr)
+                for i in data3:
+                    total=total+(int(i.qty)*int(i.rent.amount))
+                return render(request,"Owner/BookingReport.html",{'data1':data3,'total':total})
+            else:
+                return render(request,"Owner/BookingReport.html")
+        else:
+                return render(request,"Owner/BookingReport.html")
+    else:
+        return redirect("Guest:login")
