@@ -17,7 +17,7 @@
                 <thead class="thead-dark">
                     <tr>
                         <th>Sl.no</th>
-                        <th>Date</th>
+                        
                         <th>Name</th>
                         <th>Contact</th>
                         <th>Email</th>
@@ -34,7 +34,7 @@
                     {% for i in udata %}
                         <tr>
                             <td>{{ forloop.counter }}</td>
-                            <td>{{ i.date }}</td>
+                            
                             <td>{{ i.rent.owner.name }}</td>
                             <td>{{ i.rent.owner.contact }}</td>
                             <td>{{ i.rent.owner.email }}</td>
@@ -46,7 +46,7 @@
                             <td>{{ i.todate }}</td>
                             <td>
                                 {% if i.status == "1" %}
-                                    <p>Accepted | <a href="{% url 'User:AdvancePayment' i.rent.id %}">Advance Payment</a> </p>
+                                    <p>Advance Payment | <a href="{% url 'User:AdvancePayment' i.id %}">Advance Payment</a> </p>
                                 {% elif i.status == "2" %}
                                     <p>Rejected</p>
                                 {% elif i.status == "3" %}

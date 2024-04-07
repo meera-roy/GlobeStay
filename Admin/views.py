@@ -211,4 +211,4 @@ def DeleteComplaint(request,did):
     
 def logout(request):
     del request.session["aid"]
-    return redirect("Guest:Login")
+    return redirect("Guest:login")

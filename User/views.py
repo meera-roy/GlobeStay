@@ -361,7 +361,7 @@ def advancepayment(request,rid):
     advance=amount*.25
     receiptnumber=random.randint(111111,999999) 
     if request.method=="POST":
-        urdata=tbl_userrequest.objects.get(user=userdata,rent=rentdata,status=1)
+        urdata=tbl_userrequest.objects.get(id=rid)
         urdata.status=3
         urdata.save()
 
@@ -381,8 +381,8 @@ def success(request):
 
 
 def logout(request):
-    del request.session["aid"]
-    return redirect("Guest:Login")      
+    del request.session["uid"]
+    return redirect("Guest:login")      
 
 
 def Viewmore(request,rid):

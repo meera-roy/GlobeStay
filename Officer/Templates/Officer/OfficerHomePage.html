@@ -2,10 +2,6 @@
 {% load static %}
 {% block content %}
 Welcome {{oregdata.name}}
-<br><a href="{% url 'Officer:MyProfile' %}">my profile</a><br>
-<a href="{% url 'Officer:Editprofile' %}">edit profile</a><br>
-<a href="{% url 'Officer:ChangePassword' %}">change password</a><br>
-<a href="{% url 'Officer:ViewRent' %}">View Rent</a><br>
-<a href="{% url 'Officer:ViewOwnerList' %}">ViewOwnerList</a><br>
+
 
 {% endblock content %}

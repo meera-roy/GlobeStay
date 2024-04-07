@@ -72,9 +72,9 @@ def login(request):
         
         else:
             msg = "Invalid Credentials!!"
-            return render(request,"Guest/Login.html",{'msg':msg})
+            return render(request,"Guest/login.html",{'msg':msg})
     else:
-        return render(request,"Guest/Login.html")
+        return render(request,"Guest/login.html")
 
 def index(request):
     return render(request,"Guest/index.html")

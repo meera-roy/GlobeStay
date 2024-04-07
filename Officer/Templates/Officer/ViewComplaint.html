@@ -1,4 +1,4 @@
-{% extends 'Admin/header.html' %}
+{% extends 'Officer/header.html' %}
 {% load static %}
 {% block content %}
 <!DOCTYPE html>
@@ -14,6 +14,7 @@
         <div class="container mt-5">
             <form action="" method="post" id="" enctype="multipart/form-data">
                 {% csrf_token %}
+                <center><p>Owner Complaints</p></center>
                 <table class="table table-bordered table-striped" align="center">
                     <thead>
                         <tr>
@@ -21,7 +22,7 @@
                             <th>Complaint Type</th>
                             <th>Complaint Title</th>
                             <th>Content</th>
-            
+                            <th>Action</th>
                             
                         </tr>
                     </thead>
@@ -32,7 +33,32 @@
                                 <td>{{i.complainttype.complaint_name}}</td>
                                 <td>{{i.complainttitle}}</td>
                                 <td>{{i.content}}</td>
-                                
+                                <td><a href="{% url 'Officer:reply' i.id %}">Reply</a></td>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <center><p>User Complaints</p></center>
+                <table class="table table-bordered table-striped" align="center">
+                    <thead>
+                        <tr>
+                            <th>Sl.no</th>
+                            <th>Complaint Type</th>
+                            <th>Complaint Title</th>
+                            <th>Content</th>
+                            <th>Action</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in userdata %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{i.complainttype.complaint_name}}</td>
+                                <td>{{i.complainttitle}}</td>
+                                <td>{{i.content}}</td>
+                                <td><a href="{% url 'Officer:ureply' i.id %}">Reply</a></td>
                             </td>
                         </tr>
                     {% endfor %}

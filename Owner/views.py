@@ -133,20 +133,19 @@ def DeleteComplaint(request,did):
     return redirect("Owner:OwnerComplaint")    
 
 
-
 def logout(request):
-    del request.session["aid"]
-    return redirect("Guest:Login")    
+    del request.session["oid"]
+    return redirect("Guest:login")    
 
 
 def bookreport(request):
-    if 'sid' in request.session:
+    if 'oid' in request.session:
         total=0
         slr=tbl_ownerregistration.objects.get(id=request.session["oid"])
     # mdata=tbl_wcart.objects.filter(rent__Owner=slr)
         if request.method == "POST":
             if request.POST.get('fdate')!="" and request.POST.get('edate')!="":
-                data1=tbl_userrequest.objects.filter(fromdate__gt=request.POST.get('fdate'),fromdate_lt=request.POST.get('edate'),rent__owner=slr)
+                data1=tbl_userrequest.objects.filter(fromdate__gt=request.POST.get('fdate'),fromdate__lt=request.POST.get('edate'),rent__owner=slr)
                 for i in data1:
                     total=total+(int(i.qty)*int(i.rent.amount))
                 return render(request,"Owner/BookingReport.html",{'data1':data1,'total':total})

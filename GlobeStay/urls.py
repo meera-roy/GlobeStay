@@ -19,16 +19,9 @@ from django.urls import path,include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('wadmin/', include('Admin.urls')),
-    path('', include('Guest.urls')),
-    path('user/', include('User.urls')),
-    path('owner/', include('Owner.urls')),
-    path('officer/', include('Officer.urls')),
-    
-
+    path('Admin/',include("Admin.urls")),
+    path('',include("Guest.urls")),
+    path('Officer/',include("Officer.urls")),
+    path('Owner/',include("Owner.urls")),
+    path('User/',include("User.urls")),
 ]
-from django.conf.urls.static import static
-from django.conf import settings
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL,
-                          document_root=settings.MEDIA_ROOT)

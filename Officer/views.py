@@ -9,7 +9,7 @@ from User.models import *
 
 def officerhome(request):
     regdata=tbl_officer.objects.get(id=request.session['oid'])
-    return render(request,"Officer/OfficerHomepage.html",{'regdata':regdata})
+    return render(request,"Officer/OfficerHomepage.html",{'oregdata':regdata})
 
 def myprofile(request):
     oregdata=tbl_officer.objects.get(id=request.session['oid'])
@@ -109,7 +109,8 @@ def acceptrent(request,aid):
 def viewcomplaint(request):
     countrydata=tbl_country.objects.get(id=request.session["codata"])
     owndata=tbl_ownercomplaint.objects.filter(owner__place__district__state__country=countrydata)
-    return render(request,"Officer/ViewComplaint.html",{'owndata':owndata}) 
+    usercomplaint=tbl_usercomplaint.objects.filter(user__place__district__state__country=countrydata)
+    return render(request,"Officer/ViewComplaint.html",{'owndata':owndata,'userdata':usercomplaint}) 
 
 
 def viewfeedback(request):
@@ -118,5 +119,29 @@ def viewfeedback(request):
     return render(request,"Officer/ViewFeedback.html",{'udata':udata}) 
 
 def logout(request):
-    del request.session["uid"]
+    del request.session["oid"]
     return redirect("Guest:login")
+
+
+
+def Reply(request,cid):
+   
+    owndata=tbl_ownercomplaint.objects.get(id=cid)
+    if request.method=="POST":
+        owndata.reply=request.POST.get('reply')
+        owndata.status=1
+        owndata.save()
+        return redirect("Officer:ViewComplaint")
+    else:
+        return render(request,"Officer/Reply.html")    
+
+def uReply(request,cid):
+    data=tbl_usercomplaint.objects.get(id=cid)
+    
+    if request.method=="POST":
+        data.reply=request.POST.get('reply')
+        data.status=1
+        data.save()
+        return redirect("Officer:ViewComplaint")
+    else:
+        return render(request,"Officer/Reply.html") 

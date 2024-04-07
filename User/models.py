@@ -5,7 +5,7 @@ from .models import *
 # Create your models here.
 
 class tbl_userrequest(models.Model):   
-    #date=models.DateField(auto_now_add=True)  
+    # date=models.DateField(auto_now_add=True)  
     file=models.FileField(upload_to="MemberDocs/") 
     content=models.CharField(max_length=50)
     fromdate=models.DateField()

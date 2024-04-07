@@ -7,7 +7,7 @@ urlpatterns = [
      path('officerhome/',views.officerhome,name="OfficerHome"),
      path('myprofile/',views.myprofile,name="MyProfile"),
      path('Editprofile/',views.editprofile,name="Editprofile"),
-     path('ChangePassword/',views.changepassword,name="ChangePassword"),
+     path('ChangePassword/',views.changepassword,name="ChangePassword"),  
      path('viewownerlist/',views.ownerlist,name="ViewOwnerList"),
      path('acceptedownerlist/',views.acceptedownerlist,name="AcceptedOwnerList"),
      path('rejectedownerlist/',views.rejectedownerlist,name="RejectedOwnerList"), 
@@ -21,7 +21,8 @@ urlpatterns = [
      path('viewcomplaint/',views.viewcomplaint,name="ViewComplaint"),     
      path('viewfeedback/',views.viewfeedback,name="ViewFeedback"),
      path('logout/',views.logout,name="logout"),   
-
+     path('reply/<int:cid>', views.Reply, name="reply"),
+     path('ureply/<int:cid>', views.uReply, name="ureply"),
 
 
 ]

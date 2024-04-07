@@ -1,4 +1,4 @@
-{% extends 'Seller/Head.html' %}
+{% extends 'Owner/header.html' %}
 {% load static %}
 {% block content %}
 {% load mathfilters %}
@@ -33,9 +33,7 @@
         {% csrf_token %}
     <table align="center" border="1" cellpadding="10" style="border-collapse: collapse;">
         <center><h1>Work Booking Report</h1></center>
-        <center><a href="{% url 'Seller:weekly' %}" class="button-link" style="color: white;">Weekly Reports</a>
-        <a href="{% url 'Seller:monthly' %}" class="button-link" style="color: white;">Monthly Reports</a>
-        <a href="{% url 'Seller:yearly' %}" class="button-link" style="color: white;">Yearly Reports</a>
+        
     </center>
         <tr>
             <td>From Date</td>
